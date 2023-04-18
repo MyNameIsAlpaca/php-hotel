@@ -42,6 +42,8 @@
 
     $parcheggio = isset($_GET['parcheggio']) ?$_GET['parcheggio'] :"";
 
+    $rate = isset($_GET['rate']) ?$_GET['rate'] :"";
+
 
 ?>
 
@@ -71,7 +73,7 @@
             <?php 
             foreach($hotels as $hotel){
                 ?>
-                    <tr class="<?php if($parcheggio == 'no' && $hotel['parking'] == true) {echo 'hidden';} elseif($parcheggio == 'yes' && $hotel['parking'] == false){echo 'hidden';}?>">
+                    <tr class="<?php if($parcheggio == 'no' && $hotel['parking'] == true) {echo 'hidden';} elseif($parcheggio == 'yes' && $hotel['parking'] == false){echo 'hidden';}?> <?php if($rate > $hotel['vote']) { echo 'hidden';} ?>">
                         <th scope="row"><?php echo $hotel['name'] ?></th>
                         <td><?php echo $hotel['description'] ?></td>
                         <td><?php echo $hotel['parking'] ? 'Si' : 'No' ?></td>
@@ -91,6 +93,14 @@
                 <option value="both">Scegli un'opzione</option>
                 <option value="yes">Solo hotel con parcheggio</option>
                 <option value="no">Solo hotel senza parcheggio</option>
+            </select>
+            <select name="rate">
+                <option value="0">Scegli un voto</option>
+                <option value="1">Da 1 stella in su</option>
+                <option value="2">Da 2 stelle in su</option>
+                <option value="3">Da 3 stelle in su</option>
+                <option value="4">Da 4 stelle in su</option>
+                <option value="5">Da 5 stelle in su</option>
             </select>
             <button type="submit">Invia</button>
         </form>
